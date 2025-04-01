@@ -1,0 +1,173 @@
+  
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16pt;
+  background-color: #f1f2f6;
+  background-image: url('notes.jpg');
+  background-size: 100%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 5%;
+  height: 60vh;
+  color: #333;
+}
+
+/* Container for content */
+.container {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 380px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading styles */
+h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* Input styles */
+input {
+  width: 90%;
+  padding: 15px;
+  margin-bottom: 18px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+}
+
+/* Button Styles */
+button {
+  padding: 14px 22px;
+  margin: 10px 0;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+/* Add Button */
+.add-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.add-btn:hover {
+  background-color: #45a049;
+}
+
+.add-btn:active {
+  background-color: #388e3c;
+}
+
+/* Task List Styles */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  text-align: left;
+}
+
+/* Task Item Styling */
+.task-item {
+  background: #ffffff;
+  padding: 16px;
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+}
+
+.task-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+}
+
+.task-item .task-text {
+  flex-grow: 1;
+  word-wrap: break-word;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #bdc3c7;
+}
+
+/* Complete Button */
+.complete-btn {
+  background-color: #ff9800;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.complete-btn:hover {
+  background-color: #e68900;
+}
+
+.complete-btn:active {
+  background-color: #d67e00;
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+.delete-btn:active {
+  background-color: #a93226;
+}
+
+/* Icon Styles */
+button i {
+  margin-right: 8px;
+}
+
+/* Placeholder Styling */
+input::placeholder {
+  font-style: italic;
+  color: #bdc3c7;
+}
+
