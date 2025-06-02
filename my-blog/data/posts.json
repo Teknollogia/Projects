@@ -1,0 +1,46 @@
+[
+    {
+      "id": "post1",
+      "title": "A mesterséges intelligencia jövője",
+      "date": "2025-03-03",
+      "content": "A mesterséges intelligencia (AI) területe folyamatosan fejlődik, és számos új lehetőséget kínál a jövőben. Az AI alkalmazásai egyre szélesebb körben terjednek el, és hatással lehetnek az élet minden területére.",
+      "fullContent": "A mesterséges intelligencia (AI) területe folyamatosan fejlődik, és számos új lehetőséget kínál a jövőben. Az AI alkalmazásai egyre szélesebb körben terjednek el, és hatással lehetnek az élet minden területére.<table>"
+    },
+    {
+      "id": "post2",
+      "title": "Hogyan kezdj el programozni?",
+      "date": "2025-03-02",
+      "content": "A programozás megtanulása ma már sokkal könnyebb, mint valaha...",
+      "fullContent": "A programozás megtanulása ma már sokkal könnyebb, mint valaha. Ingyenes online tanfolyamok, interaktív platformok és közösségi támogatás segít abban, hogy gyorsan fejlődhess ezen a területen."
+    },
+    {
+      "id": "post3",
+      "title": "A fenntartható életmód alapjai",
+      "date": "2025-03-01",
+      "content": "A környezetvédelem egyre fontosabb szerepet kap a modern társadalomban. Egyszerű változtatásokkal, mint például az újrahasznosítás és az energiatakarékosság, mindannyian hozzájárulhatunk egy fenntarthatóbb jövőhöz...",
+      "fullContent": "A környezetvédelem egyre fontosabb szerepet kap a modern társadalomban. Egyszerű változtatásokkal, mint például az újrahasznosítás és az energiatakarékosság, mindannyian hozzájárulhatunk egy fenntarthatóbb jövőhöz. A tudatos vásárlás, a fenntartható energiák használata és a környezetbarát közlekedés mind olyan lépések, amelyekkel csökkenthetjük ökológiai lábnyomunkat."
+    },
+    {
+      "id": "post4",
+      "title": "A digitális nomád életstílus előnyei és kihívásai",
+      "date": "2025-03-09",
+      "content": "A távoli munkavégzés lehetőséget ad arra, hogy bárhonnan dolgozhassunk a világban. Azonban fontos a megfelelő időgazdálkodás és az egyensúly fenntartása a munka és a szabadidő között.",
+      "fullContent": "A távoli munkavégzés lehetőséget ad arra, hogy bárhonnan dolgozhassunk a világban. Azonban fontos a megfelelő időgazdálkodás és az egyensúly fenntartása a munka és a szabadidő között.<ul>"
+    },
+    {
+      "id": "post5",
+      "title": "Egészséges táplálkozás modern életvitel mellett",
+      "date": "2025-03-07",
+      "content": "",
+      "fullContent": "Rohanó világunkban kihívás lehet az egészséges táplálkozás fenntartása. Fontos, hogy tudatosan válasszuk meg az ételeinket, és figyeljünk a megfelelő tápanyagbevitelre.",
+      "image": "/images/healthy.jpeg"
+    },
+    {
+      "id": "post6",
+      "title": "A mesterséges intelligencia jövője",
+      "date": "2025-03-03",
+      "content": "A mesterséges intelligencia (AI) területe folyamatosan fejlődik, és számos új lehetőséget kínál a jövőben. Az AI alkalmazásai egyre szélesebb körben terjednek el, és hatással lehetnek az élet minden területére.",
+      "fullContent": "A mesterséges intelligencia (AI) területe folyamatosan fejlődik, és számos új lehetőséget kínál a jövőben. Az AI alkalmazásai egyre szélesebb körben terjednek el, és hatással lehetnek az élet minden területére.",
+      "hasEditableTable": true
+    }
+  ]

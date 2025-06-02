@@ -1,0 +1,203 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.myHeader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 175px;
+  background-color: rgb(98, 115, 226);
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  box-shadow: 4px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.myHeader h1 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.myHeader nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.myHeader nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.myHeader nav ul li a:hover {
+  color: #ffcc00;
+}
+
+.main-content {
+  display: flex;
+  margin-left: 215px; /* Fejléc szélessége (175px) + padding (20px * 2) */
+  margin-right: 215px; /* Hely a jobb oldali Sidebar számára */
+  padding: 20px;
+  flex: 1;
+}
+
+main {
+  max-width: 900px;
+  flex: 1;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Középre igazítás */
+}
+
+.blogPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+article {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  transition: transform 0.3s ease-in-out;
+}
+
+article:hover {
+  transform: translateY(-3px);
+}
+
+article h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+article time {
+  font-size: 0.9rem;
+  color: #666;
+  display: block;
+  margin-bottom: 10px;
+}
+
+article p {
+  margin-bottom: 15px;
+}
+
+button {
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-right: 10px;
+}
+
+button:hover {
+  background: linear-gradient(to right, #ff6b6b, #ffcc00);
+}
+
+#aside {
+  position: fixed;
+  right: 0;
+  top: 20;
+  height: 100vh;
+  width: 175px;
+  color: white;
+  padding: 20px;
+  background: rgb(98, 115, 226);
+  border-radius: 8px 0 0 8px;
+  box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+#aside h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+#aside ul {
+  padding: 0;
+  list-style: none;
+}
+
+#aside ul li {
+  margin-bottom: 10px;
+}
+
+#aside ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+#aside ul li a:hover {
+  color: #ff7e5f;
+}
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment-section form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.comment-section input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.comment-section button {
+  padding: 10px 20px;
+}
+
+.comment-section .comments {
+  margin-top: 10px;
+}
+
+.comment-section .comments p {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+/* Editable Table */
+.editable-table {
+  margin-top: 20px;
+}
+
+
+
