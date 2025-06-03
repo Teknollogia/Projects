@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Head from 'next/head';
+import Header from '@/components/Header';
+import '../styles/global.css';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -57,6 +59,7 @@ export default function LoginPage() {
 
   return (
     <main className="login-page">
+      <Header/>
       <Head>
         <title> Blog - {isLoginMode ? 'Login' : 'Register'}</title>
         <link rel="icon" href="/favicon.ico" />

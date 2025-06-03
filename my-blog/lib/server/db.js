@@ -93,6 +93,42 @@ async function fetchPosts() {
   }
 }
 
+async function addPost(title, content, fullContent, image, hasEditableTable) {
+    let connection;
+    try {
+        connection = await getConnection();
+        const id = `post_${Date.now()}`;
+        await connection.execute(
+            `INSERT INTO posts (id, title, time, content, image, fullContent, hasEditableTable)
+            VALUES (:id, :title, SYSDATE, :content, :image, :fullContent, :hasEditableTable)`,
+            {
+                id,
+                title,
+                content,
+                image: image || null,
+                fullContent: fullContent || null,
+                hasEditableTable: hasEditableTable ? 1 : 0,
+            },
+            {autoCommit: true}
+        );
+        console.log("Post added");
+        return {
+            id,
+            title,
+            time: new Date().toISOString(),
+            content,
+            image,
+            fullContent,
+            hasEditableTable,
+        };
+    } catch (err) {
+        console.error('Error adding post:', err.message);
+        throw err;
+    } finally {
+        if (connection) await connection.close();
+    }
+}
+
 async function registerUser(username, email, password) {
   let connection;
   try {
@@ -147,4 +183,4 @@ async function findUserByEmail(email) {
     }
 }
 
-export { fetchPosts, registerUser, findUserByEmail };
+export { fetchPosts, addPost, registerUser, findUserByEmail };

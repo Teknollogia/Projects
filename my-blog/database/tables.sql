@@ -62,3 +62,4 @@ INSERT INTO posts (id, title, time, content, fullContent, hasEditableTable) VALU
 
 
 
+Select * from users;
