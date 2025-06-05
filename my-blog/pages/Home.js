@@ -6,7 +6,7 @@ import EditableTable from '../components/EditableTable';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import Header from '@/components/Header';
+import Header from "@/components/Header";
 
 export async function getServerSideProps(context) {
   const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
@@ -34,12 +34,15 @@ export default function Home({ initialPosts }) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const storedUser = localStorage.getItem('user');
-      console.log('Home.js - Stored user:', storedUser); // Debug log
+      console.log('Home.js - Stored user:', storedUser);
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } else {
+        router.push('/login');
       }
     }
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem('user');
@@ -71,13 +74,18 @@ export default function Home({ initialPosts }) {
       alert('Title and content are required');
       return;
     }
+    if (!user || !user.id) {
+      alert('User ID is not available. Please log in again.');
+      router.push('/login');
+      return;
+    }
     try {
       const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
       const host = window.location.host;
       const res = await fetch(`${protocol}://${host}/api/posts`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newPost),
+        body: JSON.stringify({ ...newPost, userId: user.id }),
       });
       const addedPost = await res.json();
       if (res.ok) {
@@ -91,12 +99,51 @@ export default function Home({ initialPosts }) {
           hasEditableTable: false,
         });
       } else {
-        alert('Failed to add post: ' + addedPost.error);
+        alert('Post failed to be added: ' + addedPost.error);
       }
     } catch (err) {
       alert('Error adding post: ' + err.message);
     }
   };
+
+  const handleDeletePost = async (postId) => {
+    try {
+      const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+      const host = window.location.host;
+      const res = await fetch(`${protocol}://${host}/api/posts`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId, userId: user.id }),
+      });
+      const result = await res.json();
+      if (res.ok) {
+        setPosts(posts.filter((post) => post.id !== postId));
+      } else {
+        alert('Failed to delete post: ' + result.error);
+      }
+    } catch (err) {
+      alert('Error deleting post: ' + err.message);
+    }
+  };
+
+  const onDeleteComment = async (commentId) => {
+      try {
+        const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+        const host = window.location.host;
+        const res = await fetch(`${protocol}://${host}/api/comments`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ commentId, userId: user?.id, userRole: user?.role }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.error || 'Failed to delete comment.');
+        }
+      } catch (error) {
+          throw new Error('Error deleting comment: ' + commentId);
+      }
+
+  }
 
   const renderContent = (post) => {
     if (post.image) {
@@ -163,13 +210,16 @@ export default function Home({ initialPosts }) {
     return <div>{post.fullContent || post.content}</div>;
   };
 
+  if (!user) {
+    return <p>Redirecting to login...</p>;
+  }
+
   return (
       <main className="home">
         <Head>
           <title>Home - Blog</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <Header/>
         <h1>Welcome, {user?.username || 'Guest'}</h1>
         {user && (
             <button onClick={handleLogout} className="logout-button">
@@ -177,18 +227,8 @@ export default function Home({ initialPosts }) {
             </button>
         )}
         {user && (
-            <div className="add-post-button" style={{ marginBottom: '20px' }}>
-              <button
-                  onClick={() => setShowAddForm(!showAddForm)}
-                  style={{
-                    padding: '10px 20px',
-                    backgroundColor: '#0070f3',
-                    color: 'white',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                  }}
-              >
+            <div className="add-post-button">
+              <button onClick={() => setShowAddForm(!showAddForm)}>
                 {showAddForm ? 'Cancel' : 'Add new post'}
               </button>
             </div>
@@ -263,11 +303,15 @@ export default function Home({ initialPosts }) {
                     fullContent={renderFullContent(post)}
                     toggleFavorite={toggleFavorite}
                     isFavorite={favorites.some((fav) => fav.id === post.id)}
+                    userId={post.userId}
+                    currentUserId={user?.id}
+                    onDelete={handleDeletePost}
                 />
-                <Comment postId={post.id} user={user} />
+                <Comment postId={post.id} user={user} onDeleteComment={onDeleteComment} />
               </div>
           ))}
         </section>
+        <Header/>
         <aside style={{ flex: 1 }}>
           <Sidebar favorites={favorites} />
         </aside>

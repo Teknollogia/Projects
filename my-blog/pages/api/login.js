@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
     const user = await findUserByEmail(email);
-    console.log('User found: ', user);
+    console.log('User found in login.js:', user); // Debug log
 
     if (!user || !user.PASSWORD) {
       return res.status(400).json({ message: 'Invalid email or password!' });
@@ -22,12 +22,10 @@ export default async function handler(req, res) {
       id: user.ID,
       username: user.USERNAME,
       email: user.EMAIL,
+      role: user.ROLE,
     });
-
-
   } catch (error) {
-      res.status(500).json({ message: error.message || 'Internal Server Error' });
-      console.error('Login error: ', error.message);
-      res.status(500).json({ message: 'Internal Server Error' });
+    console.error('Login error: ', error.message);
+    res.status(500).json({ message: error.message || 'Internal Server Error' });
   }
 }

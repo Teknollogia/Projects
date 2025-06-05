@@ -1,91 +1,85 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-export default function Comment({ user, postId }) {
+export default function Comment({ postId, user, onDeleteComment }) {
   const [comments, setComments] = useState([]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
-  fetch(`/api/comments?postId=${postId}`)
-    .then(res => res.json())
-    .then(data => {
-      if (Array.isArray(data)) {
+    const fetchComments = async () => {
+      try {
+        const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+        const host = window.location.host;
+        const res = await fetch(`${protocol}://${host}/api/comments?postId=${postId}`);
+        const data = await res.json();
         setComments(data);
-      } else {
-        console.error("Expected array but got:", data);
-        setComments([]);
+      } catch (err) {
+        console.error('Error fetching comments:', err);
       }
-    })
-    .catch(err => {
-      console.error("Fetch error:", err);
-      setComments([]);
-    })
-    .finally(() => setLoading(false));
-}, [postId]);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (input.trim() === "") return;
-
-    const newComment = {
-      content: input,
-      username: user.username,
-      postId,
     };
+    fetchComments();
+  }, [postId]);
 
+  const handleAddComment = async (e) => {
+    e.preventDefault();
+    if (!user) {
+      alert('Please log in to comment');
+      return;
+    }
+    if (!newComment.trim()) {
+      alert('Comment cannot be empty');
+      return;
+    }
     try {
-      const res = await fetch("/api/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newComment),
+      const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https';
+      const host = window.location.host;
+      const res = await fetch(`${protocol}://${host}/api/comments`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId, userId: user.id, content: newComment }),
       });
-
+      const addedComment = await res.json();
       if (res.ok) {
-        const savedComment = await res.json();
-        setComments(prev => [...prev, savedComment]);
-        setInput("");
-        setError("");
+        setComments([...comments, addedComment]);
+        setNewComment('');
       } else {
-        const {error} = await res.json();
-        setError(error || "Failed to submit comment");
+        alert('Failed to add comment: ' + addedComment.error);
       }
     } catch (err) {
-      console.error("Error submitting comment:", err);
-      setError("Network error");
+      alert('Error adding comment: ' + err.message);
     }
   };
 
-  if (!user) {
-    return (
-      <p style={{ color: 'red' }}>
-        Please log in to comment.
-      </p>
-    );
-  }
+  const handleDelete = (commentId) => {
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      onDeleteComment(commentId);
+    }
+  };
 
   return (
-    <div className="comment-section">
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Write a comment..." 
-          value={input} 
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <button type="submit">Comment</button>
-      </form>
-      
-      <div className="comments">
-        {
-            loading ? <p>Loading comments...</p> : (
-            <div className="comments">
-                {comments.map((comment, index) => (
-                <p key={index}><strong>{comment.username}:</strong> {comment.content}</p>
-                ))}
+      <div className="comment-section">
+        <h3>Comments</h3>
+        {comments.map((comment) => (
+            <div key={comment.id} className="comment">
+              <p>{comment.content}</p>
+              <small>Posted by {comment.username} on {comment.createdAt}</small>
+              {user?.role === 'admin' && (
+                  <button className="delete-comment-button" onClick={() => handleDelete(comment.id)}>
+                    Delete Comment
+                  </button>
+              )}
             </div>
+        ))}
+        {user && (
+            <form onSubmit={handleAddComment}>
+          <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add a comment..."
+              className="comment-input"
+          />
+              <button type="submit">Post Comment</button>
+            </form>
         )}
       </div>
-    </div>
   );
 }

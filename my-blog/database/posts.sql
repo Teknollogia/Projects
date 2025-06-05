@@ -58,8 +58,28 @@ INSERT INTO posts (id, title, time, content, fullContent, hasEditableTable) VALU
   1
 );
 
---GRANT SELECT ON posts TO INFO21;
+
+select * from posts;
+
+/*
+ALTER TABLE posts
+ADD (
+    user_id VARCHAR2(50),
+    CONSTRAINT fk_posts_user_id FOREIGN KEY (user_id) REFERENCES users(id)
+);
+*/
+
+/*
+UPDATE posts SET user_id = 'user_1748157195312' WHERE ID = 'post1';
+UPDATE posts SET user_id = 'user_1748540336595' WHERE ID = 'post2';
+UPDATE posts SET user_id = 'user_1748157326484' WHERE ID = 'post3';
+UPDATE posts SET user_id = 'user_1748511490659' WHERE ID = 'post4';
+UPDATE posts SET user_id = 'user_1748157195312' WHERE ID = 'post5';
+UPDATE posts SET user_id = 'user_1748540336595' WHERE ID = 'post6';
+UPDATE posts SET user_id = 'user_1748157326484' WHERE ID = 'post_1748967904613';
+UPDATE posts SET user_id = 'user_1748540336595' WHERE ID = 'post_1748970306370';
+*/
 
 
 
-Select * from users;
+

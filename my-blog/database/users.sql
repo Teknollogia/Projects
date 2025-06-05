@@ -5,3 +5,25 @@ CREATE TABLE users (
     password VARCHAR2(255) NOT NULL,
     created_at DATE DEFAULT SYSDATE
 );
+
+/*
+ALTER TABLE users
+ADD role VARCHAR2(10) DEFAULT 'user';
+*/
+
+SELECT * FROM COMMENTS;
+
+
+DESCRIBE comments;
+DESCRIBE posts;
+
+/*
+ALTER TABLE comments
+MODIFY ID VARCHAR2(50);
+*/
+
+UPDATE users set role = 'admin' WHERE email = 'admin@blogging.com';
+COMMIT;
+
+select * from users;
+
