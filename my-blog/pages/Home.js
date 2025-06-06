@@ -210,7 +210,7 @@ export default function Home({ initialPosts }) {
     return <div>{post.fullContent || post.content}</div>;
   };
 
-  if (!user) {
+  /*if (!user) {
     return <p>Redirecting to login...</p>;
   }
 
