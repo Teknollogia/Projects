@@ -328,6 +328,11 @@ button:hover {
   background-color: #e63e3e;
 }
 
-
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: center;
+}
 
 
