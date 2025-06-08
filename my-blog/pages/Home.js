@@ -210,16 +210,15 @@ export default function Home({ initialPosts }) {
     return <div>{post.fullContent || post.content}</div>;
   };
 
-  /*if (!user) {
-    return <p>Redirecting to login...</p>;
-  }
 
   return (
+
       <main className="home">
         <Head>
           <title>Home - Blog</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
+        <Header/>
         <h1>Welcome, {user?.username || 'Guest'}</h1>
         {user && (
             <button onClick={handleLogout} className="logout-button">
@@ -311,7 +310,6 @@ export default function Home({ initialPosts }) {
               </div>
           ))}
         </section>
-        <Header/>
         <aside style={{ flex: 1 }}>
           <Sidebar favorites={favorites} />
         </aside>

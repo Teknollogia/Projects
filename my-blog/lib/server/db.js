@@ -270,38 +270,35 @@ async function addComment(postId, userId, username, content) {
     let connection;
     try {
         connection = await getConnection();
-        const result = await connection.execute(
-            `INSERT INTO COMMENTS (ID, POSTID, USER_ID, USERNAME, CONTENT, CREATEDAT) 
-       VALUES (:id, :postId, :userId, :username, :content, SYSDATE) 
-       RETURNING ID, POSTID, USERNAME, CONTENT, CREATEDAT INTO :outId, :outPostId, :outUsername, :outContent, :outCreatedAt`,
+        const commentId = `comment_${Date.now()}`;
+        await connection.execute(
+            `INSERT INTO COMMENTS (ID, CONTENT, USERNAME, POSTID, CREATEDAT) 
+             VALUES (:id, :content, :username, :postid, SYSDATE)`,
             {
-                id: `comment_${Date.now()}`,
-                postId,
-                userId,
+                id: commentId,
                 username,
                 content,
-                outId: { dir: oracledb.BIND_OUT, type: oracledb.STRING },
-                outPostId: { dir: oracledb.BIND_OUT, type: oracledb.STRING },
-                outUsername: { dir: oracledb.BIND_OUT, type: oracledb.STRING },
-                outContent: { dir: oracledb.BIND_OUT, type: oracledb.STRING },
-                outCreatedAt: { dir: oracledb.BIND_OUT, type: oracledb.DATE },
+                postId,
             },
             { autoCommit: true }
         );
+
+        // Return the comment details without RETURNING clause
         return {
-            id: result.outBinds.outId,
-            postId: result.outBinds.outPostId,
-            username: result.outBinds.outUsername,
-            content: result.outBinds.outContent,
-            createdAt: result.outBinds.outCreatedAt.toISOString(),
+            id: commentId,
+            postId,
+            username,
+            content,
+            createdAt: new Date().toISOString(), // Approximate SYSDATE
         };
     } catch (err) {
-        console.error('Error adding comment:', err.message);
+        console.error('Error adding comment:', err.message, err.stack);
         throw err;
     } finally {
         if (connection) {
             try {
                 await connection.close();
+                console.log('Database connection closed');
             } catch (err) {
                 console.error('Error closing connection:', err);
             }

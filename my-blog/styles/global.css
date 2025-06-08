@@ -1,4 +1,3 @@
-/* Import Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 body {
@@ -328,5 +327,7 @@ button:hover {
 .delete-comment-button:hover {
   background-color: #e63e3e;
 }
+
+
 
 

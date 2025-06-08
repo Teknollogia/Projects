@@ -8,3 +8,5 @@ CREATE TABLE DELETED_COMMENTS (
 );
 
 select * from DELETED_COMMENTS;
+
+select * from COMMENTS;
