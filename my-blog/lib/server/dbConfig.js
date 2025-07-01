@@ -1,7 +1,8 @@
 const dbConfig = {
-  user: 'INFO21',
-  password: '740422',
-  connectString: '217.73.170.82:44679/free'
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  connectString: process.env.DB_CONNECT_STRING
+
 };
 
 export default dbConfig;

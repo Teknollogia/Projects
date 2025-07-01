@@ -12,3 +12,5 @@ CREATE TABLE deleted_posts (
 );
 
 select * from deleted_posts;
+
+select * from COMMENTS;
