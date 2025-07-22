@@ -38,9 +38,9 @@ export default function Home({ initialPosts }) {
       if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
-      } else {
+      } /*else {
         router.push('/login');
-      }
+      }*/
     }
   }, [router]);
 

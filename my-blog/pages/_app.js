@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }) {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      console.log('App.js - Stored user:', parsedUser); // Ellenőrizzük a teljes objektumot
+      console.log('App.js - Stored user:', parsedUser);
       setUser(parsedUser);
     }
   }, []);

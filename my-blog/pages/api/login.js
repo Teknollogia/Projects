@@ -8,7 +8,7 @@ export default async function handler(req, res) {
 
   try {
     const user = await findUserByEmail(email);
-    console.log('User found in login.js:', user); // Debug log
+    console.log('User found in login.js:', user);
 
     if (!user || !user.PASSWORD) {
       return res.status(400).json({ message: 'Invalid email or password!' });
